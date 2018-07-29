@@ -33,6 +33,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
 
+
     @Size(min = 6)
     @NotBlank
     private String password;
@@ -43,6 +44,12 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    private boolean enabled = true;
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -76,6 +83,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
