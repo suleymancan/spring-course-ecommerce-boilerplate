@@ -20,6 +20,7 @@ public class CategoryService {
     }
 
 
+
     public void save(Category category){
         categoryRepository.save(category);
 
@@ -42,4 +43,8 @@ public class CategoryService {
         return categoryRepository.existsByName(name);
     }
 
+    //delete
+    public void deleteCategory(Long id){
+        categoryRepository.deleteById(id);
+    }
 }

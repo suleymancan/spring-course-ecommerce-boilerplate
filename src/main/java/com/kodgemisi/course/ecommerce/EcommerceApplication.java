@@ -64,7 +64,7 @@ public class EcommerceApplication {
             user.setFirstName("User");
             user.setLastName("User");
             Set<Role> roles = new HashSet<>();
-            roles.add(roleRepository.findByRoleName(Role.RoleName.USER));
+            roles.add(roleRepository.findByRoleName(Role.RoleName.ROLE_USER));
             user.setRoles(roles);
 
             // Create new admin
@@ -75,7 +75,7 @@ public class EcommerceApplication {
             admin.setFirstName("Admin");
             admin.setLastName("Admin");
             Set<Role> adminRoles = new HashSet<>();
-            adminRoles.add(roleRepository.findByRoleName(Role.RoleName.ADMIN));
+            adminRoles.add(roleRepository.findByRoleName(Role.RoleName.ROLE_ADMIN));
             admin.setRoles(adminRoles);
 
             // Create user has role both admin and user
@@ -86,8 +86,8 @@ public class EcommerceApplication {
             adminUser.setFirstName("Adminuser");
             adminUser.setLastName("Admin");
             Set<Role> adminUserRoles = new HashSet<>();
-            adminUserRoles.add(roleRepository.findByRoleName(Role.RoleName.ADMIN));
-            adminUserRoles.add(roleRepository.findByRoleName(Role.RoleName.USER));
+            adminUserRoles.add(roleRepository.findByRoleName(Role.RoleName.ROLE_ADMIN));
+            adminUserRoles.add(roleRepository.findByRoleName(Role.RoleName.ROLE_USER));
             adminUser.setRoles(adminUserRoles);
 
             registrationService.createAdmin(user);
@@ -104,6 +104,7 @@ public class EcommerceApplication {
                         .stock(fairy.baseProducer().randomBetween(30, 100))
                         .price(BigDecimal.valueOf(fairy.baseProducer().randomBetween(300, 1000)))
                         .url("https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/"+((i%15) + 1)+".jpg")
+                        .enabled(true)
                         .build();
                 productList.add(product);
             }

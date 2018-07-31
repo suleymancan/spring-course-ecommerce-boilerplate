@@ -21,7 +21,7 @@ public class CategoryValidator implements Validator {
 
         Category category = (Category) target;
         if(categoryService.existsByName(category.getName())){
-            errors.rejectValue("name","errors.mustBeUnique");
+            errors.rejectValue("name","errors.mustBeUnique","must be unique");
         }
     }
 }

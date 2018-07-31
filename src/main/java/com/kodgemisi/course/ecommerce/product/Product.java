@@ -44,6 +44,8 @@ public class Product implements Serializable {
 
     private LocalDate creationDate;
 
+    private boolean enabled = true;
+
     @Pattern(regexp = "^http.*")
     private String url;
 

@@ -11,8 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
 
-    public static final Role ADMIN = new Role(RoleName.ADMIN);
-    public static final Role USER = new Role(RoleName.USER);
+    public static final Role ADMIN = new Role(RoleName.ROLE_ADMIN);
+    public static final Role USER = new Role(RoleName.ROLE_USER);
 
     @Id
     @Enumerated(EnumType.STRING)
@@ -31,6 +31,6 @@ public class Role implements GrantedAuthority {
     }
 
     public  enum RoleName {
-        ADMIN, USER;
+        ROLE_ADMIN, ROLE_USER
     }
 }

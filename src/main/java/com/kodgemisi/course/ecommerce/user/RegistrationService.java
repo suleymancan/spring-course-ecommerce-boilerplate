@@ -22,7 +22,7 @@ public class RegistrationService {
         String encodedPassword = passwordEncoder.encode(registrationDTO.getPassword());
         user.setPassword(encodedPassword);
         Set<Role> roles= new HashSet<>();
-        roles.add(roleRepository.findByRoleName(Role.RoleName.USER));
+        roles.add(roleRepository.findByRoleName(Role.RoleName.ROLE_USER));
         user.setRoles(roles);
         userRepository.save(user);
 
