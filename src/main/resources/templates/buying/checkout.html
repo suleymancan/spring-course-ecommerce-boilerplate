@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="main-layout.html">
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container wow fadeIn">
+
+            <!-- Heading -->
+            <h2 class="my-5 h2 text-center">Checkout form</h2>
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <form th:action="@{/buy}" th:method="POST" class="card-body" th:object="${buying}">
+
+                            <!--Grid row-->
+                            <div class="row">
+
+                                <!--Grid column-->
+                                <div class="col-md-6 mb-2">
+
+                                    <!--firstName-->
+                                    <div class="md-form ">
+                                        <input type="text" id="firstName" class="form-control" th:field="*{paymentInfo.firstName}" th:errorclass="is-invalid">
+                                        <label for="firstName" class="">First name</label>
+                                        <div class="invalid-feedback" th:errors="*{paymentInfo.firstName}"></div>
+
+                                    </div>
+
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-6 mb-2">
+
+                                    <!--lastName-->
+                                    <div class="md-form">
+                                        <input type="text" id="lastName" class="form-control" th:field="*{paymentInfo.lastName}" th:errorclass="is-invalid" >
+                                        <label for="lastName" class="">Last name</label>
+                                        <div class="invalid-feedback" th:errors="*{paymentInfo.lastName}"></div>
+
+                                    </div>
+
+                                </div>
+                                <!--Grid column-->
+
+                            </div>
+                            <!--Grid row-->
+
+                            <!--Username-->
+                            <!--<div class="md-form input-group pl-0 mb-5">-->
+                                <!--<div class="input-group-prepend">-->
+                                    <!--<span class="input-group-text" id="basic-addon1">@</span>-->
+                                <!--</div>-->
+                                <!--<input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">-->
+                            <!--</div>-->
+
+                            <!--email-->
+                            <div class="md-form mb-5">
+                                <input type="text" id="email" class="form-control" placeholder="youremail@example.com" th:field="*{paymentInfo.email}" th:errorclass="is-invalid">
+                                <label for="email" class="">Email</label>
+                                <div class="invalid-feedback" th:errors="*{paymentInfo.email}"></div>
+                            </div>
+
+                            <div class="md-form mb-5">
+                                <input type="text" id="phone" class="form-control" placeholder="05050505050" th:field="*{paymentInfo.phone}" th:errorclass="is-invalid">
+                                <label for="phone" class="">Phone</label>
+                                <div class="invalid-feedback" th:errors="*{paymentInfo.phone}"></div>
+
+                            </div>
+
+
+                            <!--address-->
+                            <div class="md-form mb-5">
+                                <input type="text" id="address" class="form-control" placeholder="1234 Main St" th:field="*{paymentInfo.address}" th:errorclass="is-invalid">
+                                <label for="address" class="">Address</label>
+                                <div class="invalid-feedback" th:errors="*{paymentInfo.address}"></div>
+
+                            </div>
+
+
+
+                            <!--&lt;!&ndash;Grid row&ndash;&gt;-->
+                            <!--<div class="row">-->
+
+                                <!--&lt;!&ndash;Grid column&ndash;&gt;-->
+                                <!--<div class="col-lg-4 col-md-12 mb-4">-->
+
+                                    <!--<label for="country">Country</label>-->
+                                    <!--<select class="custom-select d-block w-100" id="country" >-->
+                                        <!--<option value="">Choose...</option>-->
+                                        <!--<option>United States</option>-->
+                                    <!--</select>-->
+                                    <!--<div class="invalid-feedback">-->
+                                        <!--Please select a valid country.-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+                                <!--&lt;!&ndash;Grid column&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;Grid column&ndash;&gt;-->
+                                <!--<div class="col-lg-4 col-md-6 mb-4">-->
+
+                                    <!--<label for="state">State</label>-->
+                                    <!--<select class="custom-select d-block w-100" id="state" >-->
+                                        <!--<option value="">Choose...</option>-->
+                                        <!--<option>California</option>-->
+                                    <!--</select>-->
+                                    <!--<div class="invalid-feedback">-->
+                                        <!--Please provide a valid state.-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+                                <!--&lt;!&ndash;Grid column&ndash;&gt;-->
+
+                                <!--&lt;!&ndash;Grid column&ndash;&gt;-->
+                                <!--<div class="col-lg-4 col-md-6 mb-4">-->
+
+                                    <!--<label for="zip">Zip</label>-->
+                                    <!--<input type="text" class="form-control" id="zip" placeholder="" >-->
+                                    <!--<div class="invalid-feedback">-->
+                                        <!--Zip code required.-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+                                <!--&lt;!&ndash;Grid column&ndash;&gt;-->
+
+                            <!--</div>-->
+                            <!--&lt;!&ndash;Grid row&ndash;&gt;-->
+
+                            <hr>
+
+                            <!--<div class="custom-control custom-checkbox">-->
+                                <!--<input type="checkbox" class="custom-control-input" id="same-address">-->
+                                <!--<label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>-->
+                            <!--</div>-->
+                            <!--<div class="custom-control custom-checkbox">-->
+                                <!--<input type="checkbox" class="custom-control-input" id="save-info">-->
+                                <!--<label class="custom-control-label" for="save-info">Save this information for next time</label>-->
+                            <!--</div>-->
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc-name">Name on card</label>
+                                    <input type="text" class="form-control" id="cc-name" placeholder="" th:field="*{paymentInfo.creditCardName}" >
+                                    <small class="text-muted">Full name as displayed on card</small>
+                                    <div class="invalid-feedback">
+                                        Name on card is required
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cc-number">Credit card number</label>
+                                    <input type="text" class="form-control" id="cc-number" placeholder="" th:field="*{paymentInfo.creditCardNumber}" >
+                                    <div class="invalid-feedback">
+                                        Credit card number is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-expiration">Expiration</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" th:field="*{paymentInfo.creditCardExpiration}">
+                                    <div class="invalid-feedback">
+                                        Expiration date required
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="cc-expiration">CVV</label>
+                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" th:field="*{paymentInfo.creditCardCVV}">
+                                    <div class="invalid-feedback">
+                                        Security code required
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+
+                        </form>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+
+                    <!-- Heading -->
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Your cart</span>
+                        <span class="badge badge-secondary badge-pill" th:text=" ${#lists.size(cartItems)}"></span>
+                    </h4>
+
+                    <!-- Cart -->
+                    <ul class="list-group mb-3 z-depth-1">
+                        <li  th:each="cartItem : ${cartItems}" th:object="${cartItem}" class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0" th:text="*{product.name}">Product name</h6>
+                                <small class="text-muted">x [[*{count}]]</small>
+                            </div>
+                            <span class="text-muted">
+                                    <span th:text="*{(count)*(product.price)}">
+                                        <i class="fa fa-turkish-lira"></i>
+                            </span>
+
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (TRY)</span>
+                            <strong>
+                                <span th:text="${cartTotal}"></span>
+                                <i class="fa fa-turkish-lira"></i>
+
+                            </strong>
+                        </li>
+                    </ul>
+                    <!-- Cart -->
+
+
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+
+</th:block>
+</body>
+</html>

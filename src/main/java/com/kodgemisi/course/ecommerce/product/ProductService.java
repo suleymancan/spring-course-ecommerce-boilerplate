@@ -1,5 +1,6 @@
 package com.kodgemisi.course.ecommerce.product;
 
+import com.kodgemisi.course.ecommerce.buying.SellingProduct;
 import com.kodgemisi.course.ecommerce.category.Category;
 import com.kodgemisi.course.ecommerce.category.CategoryService;
 import com.kodgemisi.course.ecommerce.exception.ResourceNotFoundException;
@@ -7,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -22,6 +25,21 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     private final CategoryService categoryService;
+
+    //filter
+    Page<Product> filter(ProductFilterDto productFilterDto, Pageable pageable){
+        ProductSpesificationBuilder builder = new ProductSpesificationBuilder();
+
+        builder.with("name", "=", productFilterDto.getKeyword());
+        builder.with("price", ">", productFilterDto.getMinPrice());
+        builder.with("price", "<", productFilterDto.getMaxPrice());
+        builder.with("category.name", "=",productFilterDto.getCategoryName());
+        //        builder.with("description", "=", productFilterDto.getKeyword());
+
+        Specification<Product> specification = builder.build();
+        //admin disable ettiginde...
+        return productRepository.findAll(specification,pageable);
+    }
 
     public void saveAll(List<Product> productList){
          productRepository.saveAll(productList);
@@ -76,5 +94,24 @@ public class ProductService {
     public Page<Product> findAllByEnabled(boolean enabled, Pageable pageable){
     	return productRepository.findAllByEnabled(enabled,pageable);
 	}
+
+	public void updateStockCounts(Set<SellingProduct> sellingProducts){
+        sellingProducts.forEach(sellingProduct -> {
+            Product product = sellingProduct.getProduct();
+            product.setStock(product.getStock()-sellingProduct.getCount());
+            productRepository.save(product);
+        });
+    }
+
+    //test method
+    public int addStock(Product product, int count) throws Exception{
+        if(count<0){
+            throw new Exception();
+        }
+        int currentStockCount = product.getStock();
+        currentStockCount += count;
+        product.setStock(currentStockCount);
+        return product.getStock();
+    }
 
 }

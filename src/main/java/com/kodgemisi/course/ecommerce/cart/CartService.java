@@ -19,11 +19,15 @@ public class CartService {
 
 	private final HttpSession httpSession;
 
-	List<CartItem> getAllItems() {
+	public List<CartItem> getAllItems() {
 		if (httpSession.getAttribute("cart") == null) {
 			httpSession.setAttribute("cart", new ArrayList<CartItem>());
 		}
 		return (List<CartItem>) httpSession.getAttribute("cart");
+	}
+
+	public void removeAllItems(){
+		httpSession.setAttribute("cart",new ArrayList<CartItem>());
 	}
 
 	void addNewItem(CartItem cartItem) {

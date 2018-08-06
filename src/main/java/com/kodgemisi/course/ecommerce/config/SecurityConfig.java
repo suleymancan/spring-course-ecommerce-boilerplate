@@ -1,6 +1,5 @@
 package com.kodgemisi.course.ecommerce.config;
 
-
 import com.kodgemisi.course.ecommerce.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //incele
 @AllArgsConstructor
 @EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true) method bazli
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/products/**",
                         "/cart/**",
+                        "/api/**",
                         "/h2-console/**",
                         "/css/**",
                         "/js/**")

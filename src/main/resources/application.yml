@@ -1,15 +1,19 @@
+#incele, spring profiles active = dev prefix.
 spring:
+  profiles:
+    active: dev
   jpa:
     open-in-view: false
     hibernate.ddl-auto: create
-  properties:
-    hibernate:
-      show_sql: true
-      use_sql_comments: true
-      format_sql: true
-      type: trace
-  datasource:
-    url: jdbc:h2:~/development/apps/db/e-commerce-app
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        type: trace
+  messages:
+    basename: ValidationMessages
+
 
 
 logging.level:

@@ -1,6 +1,5 @@
 package com.kodgemisi.course.ecommerce.product;
 
-
 import com.kodgemisi.course.ecommerce.category.Category;
 import lombok.*;
 
@@ -12,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,35 +22,34 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@XmlRootElement
 public class Product implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @NotBlank
-    private String name;
+	@NotBlank
+	private String name;
 
+	private String description;
 
-    private String description;
+	@Min(0)
+	private int stock;
 
-    @Min(0)
-    private int stock;
+	@Min(0)
+	@NotNull
+	private BigDecimal price;
 
-    @Min(0)
-    @NotNull
-    private BigDecimal price;
+	private LocalDate creationDate;
 
+	private boolean enabled = true;
 
-    private LocalDate creationDate;
+	@Pattern(regexp = "^http.*")
+	private String url;
 
-    private boolean enabled = true;
-
-    @Pattern(regexp = "^http.*")
-    private String url;
-
-    @NotNull
-    @OneToOne
-    private Category category;
+	@NotNull
+	@OneToOne
+	private Category category;
 
 }
